@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TamagochiView: View {
     
-    @StateObject private var viewModel = TamagochiViewModel()
+    @Bindable private var viewModel = TamagochiViewModel()
     
     var body: some View {
         VStack {

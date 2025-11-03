@@ -26,7 +26,8 @@ struct CountView: View {
 
 struct ChildCountView: View {
     
-    @StateObject private var viewModel = ChildCountViewModel()
+    //Bindable 쓸 때 VM을 DI 구조로 변경해야 함
+    @Bindable private var viewModel = ChildCountViewModel()
     
     var body: some View {
         HStack {
@@ -38,9 +39,10 @@ struct ChildCountView: View {
     }
 }
 
-class ChildCountViewModel: ObservableObject {
+@Observable
+class ChildCountViewModel {
     
-    @Published var count = 0
+    var count = 0
     
     func incrementCount() {
         count += 1
