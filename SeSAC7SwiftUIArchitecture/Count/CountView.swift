@@ -8,6 +8,10 @@
 import SwiftUI
 import Combine
 
+
+// StateObject(하위뷰 값 유지) vs ObservedObject(하위뷰 초기화)
+// State > body > 인스턴스가 새롭게 생성 -> 초기화처럼 보임
+// iOS17+ @Observable로 통합됨
 struct CountView: View {
     
     @State private var nicknameField = ""
