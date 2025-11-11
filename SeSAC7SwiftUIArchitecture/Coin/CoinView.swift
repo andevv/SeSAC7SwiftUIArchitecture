@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CoinView: View {
     
-    @State private var market: [Market] = []
+    @StateObject var viewModel = CoinViewModel()
 
     var body: some View {
         NavigationView {
@@ -19,15 +19,13 @@ struct CoinView: View {
             .navigationTitle("My Money")
         }
         .task {
-            UpbitAPI.fetchAllMarket { data in
-                market = data
-            }
+            viewModel.fetchMarket()
         }
     }
     
     func listView() -> some View {
         LazyVStack {
-            ForEach(market, id: \.self) { item in
+            ForEach(viewModel.market, id: \.self) { item in
                 rowView(item)
             }
         }
