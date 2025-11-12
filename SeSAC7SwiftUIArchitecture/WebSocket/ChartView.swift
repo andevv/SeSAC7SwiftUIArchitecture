@@ -8,23 +8,34 @@
 import SwiftUI
 
 struct ChartView: View {
+    
+    @StateObject var viewModel = CharViewModel()
+    
     var body: some View {
-        VStack {
-            HStack {
-                Button("소켓 연결 시작") {
-                    WebSocketManager.shared.openWebSocket()
-                    WebSocketManager.shared.sendMessage(
+        ScrollView {
+            VStack {
+                HStack {
+                    Button("소켓 연결 시작") {
+                        WebSocketManager.shared.openWebSocket()
+                        WebSocketManager.shared.sendMessage(
                       """
                       [{"ticket":"test"},{"type":"orderbook","codes":["KRW-BTC"]}]
                       """
-                    )
+                        )
+                    }
+                    Button("소켓 연결 종료") {
+                        WebSocketManager.shared.closeWebSocket()
+                    }
                 }
-                Button("소켓 연결 종료") {
-                    WebSocketManager.shared.closeWebSocket()
+                ForEach(viewModel.askOrderBook, id: \.id) { item in
+                    Text(item.price.formatted())
                 }
-            }
-            ForEach(0..<10) { item in
-                Text("123,456,789")
+                .background(Color.blue.opacity(0.2))
+                
+                ForEach(viewModel.bidOrderBook, id: \.id) { item in
+                    Text(item.price.formatted())
+                }
+                .background(Color.red.opacity(0.2))
             }
         }
     }
