@@ -15,7 +15,7 @@ import ComposableArchitecture
 struct NumberFeature {
     
     @ObservableState //State 구조체를 SwiftUI가 관찰하고, 뷰가 업데이트 되도록
-    struct State {
+    struct State: Equatable { //Equatable 지금은 없어도 상관 없음 (뷰 성능 최적화)
         var number = 0
     }
 
