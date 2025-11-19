@@ -27,7 +27,7 @@ struct NumberFeature {
     // state, action -> Effect
     // 동기 -> 사이드이펙트 X -> 일관된 결과 보장 (return .none)
     // 비동기 -> 사이드이펙트 O -> 일관된 결과 보장 X
-    var body: some ReducerOF<Self> {
+    var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
             case .increment:
